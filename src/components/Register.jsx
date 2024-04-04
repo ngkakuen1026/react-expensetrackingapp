@@ -24,19 +24,21 @@ const Register = () => {
               <input
                 type="text"
                 name="userName"
-                placeholder="Enter your username"
+                placeholder="Enter Your Username"
                 aria-label="Username"
                 autoComplete="given-name"
                 required
                 className="border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:border-black-600 text-center text-2xl"
               />
 
+              <input type="hidden" name="_action" value="newUser" />
+
               <button
                 type="submit"
                 className="register-btn flex items-center justify-center bg-black hover:bg-gray-300 text-white font-bold py-2 px-4 rounded ml-4"
               >
                 <span className="mr-2">Start Now</span>
-                <UserPlusIcon width={20} />
+                <UserPlusIcon className="w-10 h-10" />
               </button>
             </div>
           </Form>

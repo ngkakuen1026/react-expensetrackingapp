@@ -1,15 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-// Assets
-import BgSlow from '../assets/homebg_slow.gif';
+import React from "react";
 
 // Components
-import CustomNavbar from '../components/CustomNavbar';
+import CustomNavbar from "../components/CustomNavbar";
 
 // Helper functions
-import { fetchData } from '../helerps';
-import { Outlet, useLoaderData } from 'react-router-dom';
+import { fetchData } from "../helerps";
+import { Outlet, useLoaderData } from "react-router-dom";
 
 // Loader
 export function mainLoader() {

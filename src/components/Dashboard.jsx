@@ -1,41 +1,79 @@
-import React, { useState } from 'react';
+import React from "react";
 
 // Helper functions
-import { fetchData } from '../helerps';
-import { useLoaderData } from 'react-router-dom';
-import Register from './Register';
-import { toast } from 'react-toastify';
+import { createBudget, fetchData, wait } from "../helerps";
+import { useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
+
+// Components
+import Register from "./Register";
+import AddBudgetForm from "./AddBudgetForm";
 
 // Loader
 export function dashboardLoader() {
   const userName = fetchData("userName");
-  return { userName };
+  const budgets = fetchData("budgets");
+  return { userName, budgets };
 }
 
 // Action
 export async function dashboardAction({request}) {
+
+    // 
+    await wait();
+
     const data = await request.formData();
-    const formData = Object.fromEntries(data);
-    try {
-        throw new Error("Ya Done")
-        // localStorage.setItem("userName", JSON.stringify(formData.userName))
-        // return toast.success(`Hi, ${formData.userName}`);
-    } catch (e) {
-        throw new Error("There was a problem with creating your account.")
+    const {_action, ...values} = Object.fromEntries(data);
+    console.log(_action)
+
+    // New user submission
+    if (_action === "newUser") {
+        try {
+            localStorage.setItem("userName", JSON.stringify(values.userName))
+            return toast.success(`Hi, ${values.userName}`);
+        } catch (e) {
+            throw new Error("There was a problem with creating your account.")
+        }
     }
 
+    // New budget submission
+    if (_action === "newBudget") {
+        try {
+            createBudget({
+                name: values.newBudget,
+                amount: values.newBudgetAmount
+            })
+            return toast.success("Budget created!")
+        } catch (e) {
+            throw new Error("There was a problem with creating your budget.")
+        }
+    }
 }
 
 const Dashboard = () => {
 
     //Fetch the data from object userName created at function dashboardLoader 
-    const {userName} = useLoaderData()
+    const {userName, budgets} = useLoaderData()
 
     return (
         <>
-            {userName ? (<p>{userName}</p>) : (<Register />)}
+            {userName ? (
+                <div className="dashboard p-9">
+                    <h1 className="text-6xl font-bold mb-4">
+                        Welcome back, <span className="text-blue-500">{userName}</span>
+                    </h1>
+                    <div className="grid grid-cols-2 gap-4">
+                        {/* {budgets ? () : ()} */}
+                        <div>
+                            <AddBudgetForm />
+                    </div>
+                    </div>
+                </div>
+                ) : (
+                <Register />
+            )}
         </>
-  );
+    );
 };
 
 export default Dashboard;
