@@ -27,7 +27,7 @@ const AddBudgetForm = () => {
                 ref={formRef}
             >
                 <h2 className="text-4xl font-bold mb-4">Create Budget</h2>
-                <div className="mb-4">
+                <div className="budget-input mb-4">
                 <label htmlFor="newBudget" className="block font-semibold text-2xl mb-1">Budget Name</label>
                 <input
                     type="text"
@@ -39,7 +39,7 @@ const AddBudgetForm = () => {
                     ref={focusRef}
                 />
                 </div>
-                <div className="mb-4">
+                <div className="budget-amount-input mb-4">
                 <label htmlFor="newBudgetAmount" className="block font-semibold text-2xl mb-1">Amount</label>
                 <input
                     type="number"
@@ -61,11 +61,15 @@ const AddBudgetForm = () => {
                     disabled={isSubmitting}
                 >
                     {
-                        (isSubmitting) ? <span className="mr-2">Creating Budget... Please wait</span>:
+                        (isSubmitting) ? 
+                            <>
+                                <CurrencyDollarIcon className="w-5 h-5" />
+                                <span className="mr-2">Creating Budget... Please wait</span>
+                            </>:
                         (
                             <>
-                                <span className="mr-2">Create Budget</span>
                                 <CurrencyDollarIcon className="w-5 h-5" />
+                                <span className="mr-2">Create Budget</span>                                
                             </>
                         )
                     }

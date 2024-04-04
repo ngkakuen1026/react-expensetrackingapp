@@ -1,13 +1,14 @@
 import React from "react";
 
 // Helper functions
-import { createBudget, fetchData, wait } from "../helerps";
+import { createBudget, createExpense, fetchData, wait } from "../helerps";
 import { useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // Components
 import Register from "./Register";
 import AddBudgetForm from "./AddBudgetForm";
+import AddExpenseForm from "./AddExpenseForm";
 
 // Loader
 export function dashboardLoader() {
@@ -48,6 +49,20 @@ export async function dashboardAction({request}) {
             throw new Error("There was a problem with creating your budget.")
         }
     }
+
+    // New budget submission
+    if (_action === "newExpense") {
+        try {
+            createExpense({
+                name: values.newExpense,
+                amount: values.newExpenseAmount,
+                budgetId: values.newExpenseBudget
+            })
+            return toast.success(`Expense ${values.newExpense} created!`)
+        } catch (e) {
+            throw new Error("There was a problem with creating your expense.")
+        }
+    }
 }
 
 const Dashboard = () => {
@@ -63,10 +78,23 @@ const Dashboard = () => {
                         Welcome back, <span className="text-blue-500">{userName}</span>
                     </h1>
                     <div className="grid grid-cols-2 gap-4">
-                        {/* {budgets ? () : ()} */}
-                        <div>
-                            <AddBudgetForm />
-                    </div>
+                        {
+                            budgets && budgets.length > 0 ? (
+                                <div>
+                                    <AddBudgetForm />
+                                    <AddExpenseForm
+                                        budgets={budgets} 
+                                    />
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className="text-2xl font-semibold mb-4">
+                                        Create a budget and start managing your expenses!
+                                    </p>
+                                    <AddBudgetForm />
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 ) : (
