@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Register from "./Register";
 import AddBudgetForm from "./AddBudgetForm";
 import AddExpenseForm from "./AddExpenseForm";
+import BudgetItem from "./BudgetItem";
 
 // Loader
 export function dashboardLoader() {
@@ -64,11 +65,10 @@ export async function dashboardAction({request}) {
         }
     }
 }
-
 const Dashboard = () => {
 
     //Fetch the data from object userName created at function dashboardLoader 
-    const {userName, budgets} = useLoaderData()
+    const { userName, budgets } = useLoaderData();
 
     return (
         <>
@@ -77,28 +77,39 @@ const Dashboard = () => {
                     <h1 className="text-6xl font-bold mb-4">
                         Welcome back, <span className="text-blue-500">{userName}</span>
                     </h1>
-                    <div className="grid grid-cols-2 gap-4">
-                        {
-                            budgets && budgets.length > 0 ? (
-                                <div>
-                                    <AddBudgetForm />
-                                    <AddExpenseForm
-                                        budgets={budgets} 
-                                    />
-                                </div>
-                            ) : (
-                                <div>
-                                    <p className="text-2xl font-semibold mb-4">
-                                        Create a budget and start managing your expenses!
-                                    </p>
-                                    <AddBudgetForm />
-                                </div>
-                            )
-                        }
+                    <div className="grid lg:grid-cols-2 gap-4 mb-4">
+                        {budgets && budgets.length > 0 ? (
+                        <>
+                            <div className="w-full">
+                                <AddBudgetForm />
+                            </div>
+                            <div className="w-full">
+                                <AddExpenseForm budgets={budgets} />
+                            </div>
+                        </>
+                        ) : (
+                            <div className="w-full">
+                                <p className="text-2xl font-semibold mb-4">
+                                    Create a budget and start managing your expenses!
+                                </p>
+                                <AddBudgetForm />
+                            </div>
+                        )}
                     </div>
+
+                    {budgets && budgets.length > 0 && (
+                    <>
+                        <h2 className="text-4xl font-bold m-2">Existing Budgets</h2>
+                        <div className="existing-budgets text-2xl font-bold gap-5 grid lg:grid-cols-3">
+                            {budgets.map((budget) => (
+                                <BudgetItem key={budget.id} budget={budget} />
+                            ))}
+                        </div>
+                    </>
+                    )}
                 </div>
                 ) : (
-                <Register />
+            <Register />
             )}
         </>
     );

@@ -22,17 +22,17 @@ const AddExpenseForm = ({budgets}) => {
 
     return (
         <div className='expense-form'>
-            <h2 className="text-4xl font-bold mb-4">Create New {" "}
-                <span>
-                    {budgets.length === 1 && `${budgets.map((budget) => budget.name)}`}
-                </span>
-                {" "}Expense
-            </h2>
             <fetcher.Form
                 method="post" 
                 className="budget-input-form border border-gray-300 rounded-md p-4"
                 ref={formRef}   
             >
+                <h2 className="text-4xl font-bold mb-4">Create New {" "}
+                    <span>
+                        {budgets.length === 1 && `${budgets.map((budget) => budget.name)}`}
+                    </span>
+                    {" "}Expense
+                </h2>
                 <div className="expense-input mb-4">
                     <label htmlFor="newExpense" className="block font-semibold text-2xl mb-1">Expense Name</label>
                     <input
@@ -50,8 +50,8 @@ const AddExpenseForm = ({budgets}) => {
                     <input
                         type="number"
                         step="0.01"
-                        name="newBudgetAmount"
-                        id="newBudgetAmount"
+                        name="newExpenseAmount"
+                        id="newExpenseAmount"
                         placeholder="Amount of your expense???"
                         required
                         inputMode="decimal"
