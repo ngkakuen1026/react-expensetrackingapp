@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { deleteItem, fetchData } from '../helerps';
 
 // Components
-import ExpenseTable from "./ExpenseTable";
+import ExpenseTable from "../components/ExpenseTable";
 
 // Loader
 export function detailExpensesLoader() {

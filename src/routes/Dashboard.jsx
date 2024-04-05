@@ -6,11 +6,11 @@ import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 // Components
-import Register from "./Register";
-import AddBudgetForm from "./AddBudgetForm";
-import AddExpenseForm from "./AddExpenseForm";
-import BudgetItem from "./BudgetItem";
-import Table from "./ExpenseTable";
+import Register from "../components/Register";
+import AddBudgetForm from "../components/AddBudgetForm";
+import AddExpenseForm from "../components/AddExpenseForm";
+import BudgetItem from "../components/BudgetItem";
+import Table from "../components/ExpenseTable";
 
 // Loader
 export function dashboardLoader() {
@@ -90,7 +90,7 @@ const Dashboard = () => {
             {userName ? (
                 <div className="dashboard p-9">
                     <h1 className="text-6xl font-bold mb-4">
-                        Welcome back, <span className="text-blue-500">{userName}</span>
+                        Welcome back, <span className="text-Color19A9B2">{userName}</span>
                     </h1>
                     <div className="grid lg:grid-cols-2 gap-4 mb-4">
                         {budgets && budgets.length > 0 ? (
@@ -115,7 +115,7 @@ const Dashboard = () => {
                     {budgets && budgets.length > 0 && (
                     <>
                         <h2 className="text-4xl font-bold my-2">Existing Budgets</h2>
-                        <div className="existing-budgets text-2xl font-bold gap-5 grid lg:grid-cols-3">
+                        <div className="existing-budgets text-2xl font-bold gap-5 grid lg:grid-cols-4 grid-cols-2">
                             {budgets.map((budget) => (
                                 <BudgetItem key={budget.id} budget={budget} />
                             ))}

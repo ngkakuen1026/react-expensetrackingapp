@@ -8,10 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import Main, { mainLoader } from "./layouts/Main"
 
 // Custom Routes
-import Dashboard, {dashboardAction, dashboardLoader} from "./components/Dashboard";
-import Error from "./components/Error";
-import DetailExpenses, { detailExpensesAction, detailExpensesLoader } from "./components/DetailExpenses";
-import BudgetPage from "./components/BudgetPage";
+import Dashboard, {dashboardAction, dashboardLoader} from "./routes/Dashboard";
+import Error from "./routes/Error";
+import DetailExpenses, { detailExpensesAction, detailExpensesLoader } from "./routes/DetailExpenses";
+import BudgetPage, { budgetAction, budgetLoader } from "./routes/BudgetPage";
 
 // Actions
 import { logoutAction } from "./actions/logout";
@@ -33,6 +33,9 @@ const router = createBrowserRouter([
       {
         path: "budget/:id",
         element: <BudgetPage />,
+        loader: budgetLoader,
+        action: budgetAction,
+        errorElement: <Error />
       },
       {
         path: "detailexpenses",

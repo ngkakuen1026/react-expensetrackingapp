@@ -10,7 +10,7 @@ import {ArchiveBoxXMarkIcon} from "@heroicons/react/24/solid";
 const CustomNavbar = ({userName}) => {
   return (
     <nav className="bg-white">
-      <div className="mx-auto px-4 sm:px-6 lg:px-8 flex items-center h-32">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
         <div className="flex justify-center items-center">
           <NavLink to="/" aria-label="nav to home">
             <img className="block h-32 w-auto" src={Logo} alt="Logo" />
@@ -19,7 +19,7 @@ const CustomNavbar = ({userName}) => {
         <div className="hidden md:flex ml-4">
           <ul className="flex items-center space-x-4">
             <li className="text-gray-500 hover:text-gray-700 cursor-pointer text-4xl">
-              <NavLink to="/dashboard" aria-label="nav to dashboard">Dashboard</NavLink>
+              <NavLink to="/detailexpenses" aria-label="nav to dashboard">Expenses</NavLink>
             </li>
           </ul>
         </div>
@@ -36,8 +36,8 @@ const CustomNavbar = ({userName}) => {
               }}
             >
               <button type="submit" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded flex items-center">
-                <span className="mr-2">Log Out</span>
-                <ArchiveBoxXMarkIcon className="w-5 h-5" />
+                <span className="mr-2 ">Log Out</span>
+                <ArchiveBoxXMarkIcon className="w-10 h-10" />
               </button>
             </Form>
           )}
