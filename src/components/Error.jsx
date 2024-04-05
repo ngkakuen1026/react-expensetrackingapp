@@ -5,7 +5,7 @@ import { ArrowUturnLeftIcon } from "@heroicons/react/24/solid";
 const Error = () => {
   const error = useRouteError();
 
-  //Used to intilizae
+  //Used to intilizae navigation
   const navigate = useNavigate();
 
   return (

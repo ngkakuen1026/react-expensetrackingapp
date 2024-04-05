@@ -5,7 +5,11 @@ import { toast } from "react-toastify";
 export async function logoutAction() {
     deleteItem({key: "userName"});
 
+    deleteItem({key: "budgets"});
+
+    deleteItem({key: "expenses"});
+
     toast.success("Account Deleted")
 
-    return redirect("/dashboard");
+    return redirect("/");
 }

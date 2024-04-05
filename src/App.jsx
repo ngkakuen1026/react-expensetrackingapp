@@ -10,6 +10,7 @@ import Main, { mainLoader } from "./layouts/Main"
 // Custom Routes
 import Dashboard, {dashboardAction, dashboardLoader} from "./components/Dashboard";
 import Error from "./components/Error";
+import DetailExpenses, { detailExpensesLoader } from "./components/DetailExpenses";
 
 // Actions
 import { logoutAction } from "./actions/logout";
@@ -22,11 +23,16 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [  
       {
-        path: "dashboard",
+        index: true,
         element: <Dashboard/>,
         loader: dashboardLoader,
         action: dashboardAction,
         errorElement: <Error />
+      },
+      {
+        path: "detailexpenses",
+        element: <DetailExpenses />,
+        loader: detailExpensesLoader,
       },
       {
         path: "logout",
