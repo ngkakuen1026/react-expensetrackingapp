@@ -1,7 +1,7 @@
 import React from "react";
 
 // Helper functions
-import { createBudget, createExpense, fetchData, wait } from "../helerps";
+import { createBudget, createExpense, deleteItem, fetchData, wait } from "../helerps";
 import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -53,17 +53,30 @@ export async function dashboardAction({request}) {
         }
     }
 
-    // New budget submission
+    // New expense submission
     if (_action === "newExpense") {
         try {
             createExpense({
                 name: values.newExpense,
                 amount: values.newExpenseAmount,
                 budgetId: values.newExpenseBudget
-            })
-            return toast.success(`Expense ${values.newExpense} created!`)
+            });
+            return toast.success(`Expense ${values.newExpense} created!`);
         } catch (e) {
-            throw new Error("There was a problem with creating your expense.")
+            throw new Error("There was a problem with creating your expense.");
+        }
+    }
+
+    // Delete expense
+    if (_action === "deleteExpense") {
+        try {
+            deleteItem({
+                key: "expenses",
+                id: values.expenseId
+            });;
+            return toast.success(`Expense removed!`)
+        } catch (e) {
+            throw new Error("There was a problem with removing your expense.");
         }
     }
 }

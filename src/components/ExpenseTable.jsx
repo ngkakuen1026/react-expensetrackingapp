@@ -10,7 +10,7 @@ const ExpenseTable = ({expenses}) => {
         <thead>
             <tr className='bg-blue-400 text-white'>
                 {
-                    ["Name", "Amount", "Date"].map((i, index) => (
+                    ["Name", "Amount", "Date", "Budget", ""].map((i, index) => (
                         <th key={index} className="py-3 px-6 border-b font-semibold text-xl">
                           {i}
                         </th>

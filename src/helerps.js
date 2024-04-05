@@ -11,13 +11,17 @@ const generateRandomColor = () => {
 
 // Time delay simulation
 export const wait = () => new Promise(
-    res => setTimeout (res, Math.random() * 3200)
+    res => setTimeout (res, Math.random() * 1600)
 )
 
+// Get all items from local storage
+export const getAllMatchingItems = ({category, key, value}) => {
+    const data = fetchData(category) ?? [];
+    return data.filter((item) => item[key] === value);
+}
+
 // Create budget
-export const createBudget = ({
-    name, amount
-}) => {
+export const createBudget = ({name, amount}) => {
     const newItem = {
         id: crypto.randomUUID(),
         name: name,
@@ -29,15 +33,18 @@ export const createBudget = ({
     return localStorage.setItem("budgets", JSON.stringify([...existingBudgets, newItem]))
 }
 
-// Delete
-export const deleteItem = ({key}) => {
+// Delete item from local storage
+export const deleteItem = ({key, id}) => {
+    const existingData = fetchData(key);
+    if (id) {
+        const newData = existingData.filter((item) => item.id !== id);
+        return localStorage.setItem(key, JSON.stringify(newData));
+    }
     return localStorage.removeItem(key);
 }
 
 // Create expense
-export const createExpense = ({
-    name, amount, budgetId
-}) => {
+export const createExpense = ({name, amount, budgetId}) => {
     const newItem = {
         id: crypto.randomUUID(),
         name: name,
@@ -49,7 +56,7 @@ export const createExpense = ({
     return localStorage.setItem("expenses", JSON.stringify([...existingExpenses, newItem]))
 }
 
-// 
+// Calculate the expenses based on the budget
 export const calculateSpent = (budgetId) => {
     const expenses = fetchData("expenses") ?? [];
     const budgetSpent = expenses.reduce((acc, expense) => {
