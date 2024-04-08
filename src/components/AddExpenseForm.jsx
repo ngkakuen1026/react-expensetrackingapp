@@ -28,7 +28,7 @@ const AddExpenseForm = ({budgets}) => {
                 ref={formRef}   
             >
                 <h2 className="text-4xl font-bold mb-4">Create New {" "}
-                    <span>
+                    <span className="text-Color19A9B2">
                         {budgets.length === 1 && `${budgets.map((budget) => budget.name)}`}
                     </span>
                     {" "}Expense

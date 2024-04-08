@@ -70,13 +70,15 @@ const BudgetPage = () => {
   const { budget, expenses} = useLoaderData();
 
   return (
-    <div className="budget-page">
-      <h2 className="text-4xl font-bold my-2">
+    <div className="budget-page p-9">
+      <h2 className="text-4xl font-bold mb-4">
         <span className="text-Color19A9B2">{budget.name} </span>
         Overview
       </h2>
-      <div>
-        <BudgetItem budget={budget}/>
+      <div className="mb-4">
+        <BudgetItem budget={budget} showDelete={true}/>
+      </div>
+      <div className="mb-4">
         <AddExpenseForm budgets={[budget]} />
       </div>
       {
